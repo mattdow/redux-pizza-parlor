@@ -14,11 +14,11 @@ import logger from 'redux-logger';
 //    quantity: quantity
 // }
 const pizzaOrderList = (state = [], action) => {
-  if ((action.type === 'ADD_PIZZA')) {
+  if (action.type === 'ADD_PIZZA') {
     // at the moment, we're just adding a new pizza (base mode requirement)
     // this does not increase the quantity if this pizza is already in the order
     return [...state, action.payload];
-  } else if ((action.type === 'REMOVE_PIZZA')) {
+  } else if (action.type === 'REMOVE_PIZZA') {
     // this will remove all the pizzas with an id equivalent to the id of the
     // pizza in the payload
     // the filter returns a new array, so it updates state
@@ -59,11 +59,22 @@ const customerInfo = (state = {}, action) => {
   return state;
 };
 
+// this is a reducer to keep track of total order
+const orderTotal = (state = 0, action) => {
+  if (action.type === 'ADD_PIZZA') {
+    return state + Number(action.payload.price);
+  } else if (action.type === 'REMOVE_PIZZA') {
+    return state - Number(action.payload.price);
+  }
+  return state;
+};
+
 // create a store
 const store = createStore(
   combineReducers({
     pizzaOrderList,
     customerInfo,
+    orderTotal,
   }),
   applyMiddleware(logger)
 );
