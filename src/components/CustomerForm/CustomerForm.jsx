@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-// import Picker from 'react-picker';
 
 function CustomerForm() {
   const [newCustomer, setNewCustomer] = useState({

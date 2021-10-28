@@ -1,0 +1,17 @@
+
+.App-header {
+    background-color: royalblue;
+    height: 100px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .App-title {
+    font-size: 2em;
+    text-align: left;
+  }
+  
+  .Order-total {
+      text-align: right;
+}
