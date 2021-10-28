@@ -8,6 +8,9 @@ function PizzaItem({item, }) {
     // define a variable equal to the current order number
     const currentOrder = useSelector(store => store.orderReducer)
 
+    //define a dispatch variable
+    const dispatch = useDispatch();
+
     // define a variable and setter to determine if we show an add button or delete button
     let [addDelete, setAddDelete] = useState(true);
 
@@ -17,8 +20,22 @@ function PizzaItem({item, }) {
         setAddDelete(!addDelete);
     }
 
-    const addPizza = () => {
+    // define a function to dispatch a new pizza to the reducer
+    const addPizza = (item) => {
+        console.log('Adding pizza', item.name);
+        dispatch({
+            type: 'ADD_PIZZA',
+            payload: item
+        })
+    }
 
+    // define a function to dispatch a delete pizza to the reducer
+    const deletePizza = (item) => {
+        console.log('Deleting pizza', item.name);
+        dispatch({
+            type: 'DELETE_PIZZA',
+            payload: item
+        })
     }
 
 
