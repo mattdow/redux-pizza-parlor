@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import Checkout from '../Checkout/Checkout.jsx';
+import AdminComp from '../Admin/Admin.jsx';
 
 function App() {
 
@@ -12,7 +14,11 @@ function App() {
   
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
-  
+
+
+      <Checkout />
+
+      <AdminComp />
     </div>
   );
 }
