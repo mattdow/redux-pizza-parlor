@@ -17,17 +17,18 @@ function App() {
           <h1 className="App-title">Prime Pizza</h1>
         </header>
 
-        <PizzaList />
-
-        <img src="images/pizza_photo.png" />
-        <p>Pizza is great.</p>
+        <Route path="/" exact>
+          <PizzaList />
+        </Route>
 
         <Route path="/CustomerForm" exact>
           <CustomerForm />
         </Route>
 
-        {/* <CustomerForm /> */}
-        <Checkout />
+        
+        <Route path="/checkout" exact>
+          <Checkout />
+        </Route>
 
         <Route path="/admin" exact>
           <AdminComp />

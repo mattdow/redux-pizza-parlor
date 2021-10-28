@@ -3,12 +3,15 @@ import {useSelector} from 'react-redux';
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 function PizzaList() {
     // define and initialize our array of pizza menu items
     let [pizzaMenu, setPizzaMenu] = useState([]);
 
     // define a function to GET the pizza menu from the route /api/pizza
+
+    const history = useHistory();
 
     const getPizzaMenu = () => {
         console.log('In getPizzaMenu');
@@ -25,7 +28,15 @@ function PizzaList() {
     useEffect(() => {
         getPizzaMenu();
     }, []);
-    return (
+
+    const handleClick = () => {
+        history.push(`/CustomerForm`);
+    }
+
+
+    return (<>
+        <h2>Step 1: Select your pizza</h2>
+
         <div className="menu-container">
             {pizzaMenu.map((item) => (
                 <PizzaItem
@@ -34,6 +45,8 @@ function PizzaList() {
                 />
             ))}
         </div>
-    )
+
+        <button onClick={handleClick}>Next</button>
+    </>)
 }
 export default PizzaList;
