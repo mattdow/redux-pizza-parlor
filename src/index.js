@@ -61,9 +61,10 @@ const customerInfo = (state = {}, action) => {
 
 // this is a reducer to keep track of total order
 const totalOrder = (state = 0, action) => {
-  if (action.type === 'UPDATE_TOTAL') {
-    // we're expecting the new total as a number as payload
-    return Number(action.payload);
+  if (action.type === 'ADD_PIZZA') {
+    return state + Number(action.payload.price);
+  } else if (action.type === 'REMOVE_PIZZA') {
+    return state - Number(action.payload.price);
   }
   return state;
 };
