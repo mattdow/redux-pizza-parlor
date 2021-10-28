@@ -28,6 +28,14 @@ function Admin() {
       });
   };
 
+  const convertTime = (time) => {
+    const t = new Date(time);
+    // the month is 0-indexed, so we need to add 1!
+    const newDate = `${t.getMonth() + 1}/${t.getDate()}/${t.getFullYear()}`;
+    console.log(`newDate`, newDate);
+    return newDate;
+  };
+
   return (
     <>
       <table className="adminTable">
@@ -43,7 +51,7 @@ function Admin() {
           {orderList.map((person, i) => (
             <tr>
               <td>{person.customer_name}</td>
-              <td>{person.time}</td>
+              <td>{convertTime(person.time)}</td>
               <td>{person.type}</td>
               <td>{person.total}</td>
             </tr>
