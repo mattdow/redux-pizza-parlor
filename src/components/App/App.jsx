@@ -6,16 +6,15 @@ import AdminComp from '../Admin/Admin.jsx';
 import CustomerForm from '../CustomerForm/CustomerForm.jsx';
 import { Route, HashRouter as Router, Link } from 'react-router-dom';
 import PizzaList from '../PizzaList/PizzaList';
+import Header from '../Header/Header.jsx';
 
 function App() {
   return (
+
     <Router>
       <div className="App">
-        <Link to="/CustomerForm">Customer Info</Link>
-
-        <header className="App-header">
-          <h1 className="App-title">Prime Pizza</h1>
-        </header>
+        {/* <Link to="/CustomerForm">Customer Info</Link> */}
+        <Header/>
 
         <Route path="/" exact>
           <PizzaList />
