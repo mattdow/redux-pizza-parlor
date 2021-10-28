@@ -20,16 +20,23 @@ function Admin() {
         setOrderList(response.data);
       })
       .catch((err) => {
+        // let the developer know something went wrong
         console.log(
           'There was an error retrieving the order list from the server:',
           err
         );
+        // let the user know something went wrong
         alert('There was an error retrieving the pizza order list.');
       });
   };
 
   const convertTime = (time) => {
+    // convert the time from the server into a js object
     const t = new Date(time);
+    // the month is 0-indexed, so we need to add 1!
+    let month = t.getMonth() + 1;
+    let dayInMonth = t.getDate();
+    let year = t.getFullYear();
     // change the hours from military time to am / pm
     let hours;
     let amOrPm = 'am';
@@ -46,12 +53,8 @@ function Admin() {
       // add a zero in front if the length of minutes, as a string, is 1
       minutes = '0' + minutes;
     }
-    // the month is 0-indexed, so we need to add 1!
-    const newDate = `${
-      t.getMonth() + 1
-    }/${t.getDate()}/${t.getFullYear()} at ${hours}:${minutes}${amOrPm} `;
-    console.log(`newDate`, newDate);
-    return newDate;
+    // return all of the above in a nice string using template literals
+    return `${month}/${dayInMonth}/${year} at ${hours}:${minutes}${amOrPm} `;
   };
 
   return (
