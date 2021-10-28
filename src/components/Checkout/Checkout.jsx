@@ -1,7 +1,47 @@
-import './Checkout.css'
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { useState } from 'react';
+import './Checkout.css';
+import axios from 'axios';
+
 
 function Checkout() {
-    const pizzaArray = [];
+
+    const pizzaOrderList = useSelector(store => store.pizzaOrderList);
+    const customerInfo = useSelector(store => store.customerInfo);
+
+    const history = useHistory();
+
+    const [currentOrder, setCurrentOrder] = useState({
+        customer_name: customerInfo.customer_name,
+        street_address: customerInfo.street_address,
+        city: customerInfo.city,
+        zip: customerInfo.zip,
+        type: customerInfo.type,
+        total: customerInfo.total,
+        pizzas: [pizzaOrderList]
+    })
+
+    const handleCheckout = () => {
+        const confirmation = confirm(`Are you sure you want to checkout?`);
+
+        if (confirmation) {
+            
+            axios({
+                method: `POST`,
+                url: `/api/order`,
+                data: currentOrder
+            }).then((response) => {
+                //get request
+                setCurrentOrder({});
+                history.push('/home');
+            }).catch((error) => {
+                console.log(`ERROR in /api/order POST`, error);
+            });
+        }
+
+
+    }
 
     return (<>
         <h1>Step 3: Checkout</h1>
@@ -10,12 +50,12 @@ function Checkout() {
                 <tbody>
                     <tr>
                         <td>
-                            Name <br />
-                            Address <br />
-                            City <br />
+                            Name: {currentOrder.customer_name} <br />
+                            Address: {currentOrder.street_address}<br />
+                            City: {currentOrder.city} <br />
                         </td>
                         <td>
-                            For Delivery / Carryout
+                            Delivery/Pickup: {currentOrder.type}
                         </td>
                     </tr>
                 </tbody>
@@ -30,18 +70,19 @@ function Checkout() {
                     </tr>
                 </thead>
                 <tbody>
-                    {pizzaArray.map((item, i) => (<>
-                        <tr>
-                            <td>item.Pizza 1</td>
-                            <td>item.Pizza cost</td>
+                    {currentOrder.pizzas.map((item) => (<>
+                        <tr 
+                        key={item.id}
+                        >
+                            <td>item.name</td>
+                            <td>item.cost</td>
                         </tr>
                     </>))}
-
                 </tbody>
             </table>
         </div>
-        <h3>Total: $500</h3>
-        <button>Checkout</button>
+        <h3>Total: {currentOrder.total}</h3>
+        <button onClick={handleCheckout}>Checkout</button>
     </>)
 }
 export default Checkout;
