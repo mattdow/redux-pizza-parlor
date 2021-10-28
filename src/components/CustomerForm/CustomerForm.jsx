@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import Picker from 'react-picker';
+// import Picker from 'react-picker';
 
 function CustomerForm() {
 
@@ -24,12 +24,6 @@ function CustomerForm() {
         <form onSubmit={handleSubmit}>
             <h2>Step 2: Customer Information</h2>
             <label>PickUp or Delivery</label>
-            <div className="edit">
-                <Picker label="method">
-                    {/* ref="method"
-                    options={['Pickup', 'Delivery']} */}
-                </Picker>
-                </div>
             <input
             type ="text"
             placeholder="Name"
