@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 
 function CustomerForm() {
   const [newCustomer, setNewCustomer] = useState({
@@ -10,6 +11,7 @@ function CustomerForm() {
     type: '',
   });
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -27,6 +29,8 @@ function CustomerForm() {
       zip: '',
       type: '',
     });
+
+    history.push(`/checkout`);
   };
 
   console.log(`newCustomer`, newCustomer);

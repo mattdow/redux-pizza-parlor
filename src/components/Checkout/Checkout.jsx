@@ -21,7 +21,7 @@ function Checkout() {
         zip: customerInfo.zip,
         type: customerInfo.type,
         total: customerInfo.total,
-        pizzas: [pizzaOrderList]
+        pizzas: [...pizzaOrderList]
     })
 
     const handleCheckout = () => {
@@ -44,6 +44,8 @@ function Checkout() {
 
 
     }
+
+    console.log(currentOrder);
 
     return (<>
         <h1>Step 3: Checkout</h1>
@@ -76,8 +78,8 @@ function Checkout() {
                         <tr 
                         key={item.id}
                         >
-                            <td>item.name</td>
-                            <td>item.cost</td>
+                            <td>{item.name}</td>
+                            <td>{item.price}</td>
                         </tr>
                     </>))}
                 </tbody>
