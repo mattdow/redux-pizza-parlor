@@ -30,8 +30,26 @@ function Admin() {
 
   const convertTime = (time) => {
     const t = new Date(time);
+    // change the hours from military time to am / pm
+    let hours;
+    let amOrPm = 'am';
+    hours = t.getHours();
+    if (hours > 12) {
+      // set this to am and pm time
+      hours = hours - 12;
+      // in this case it's pm
+      amOrPm = 'pm';
+    }
+    // set the minutes to display correctly, adding a 0 if less than 10
+    let minutes = String(t.getMinutes());
+    if (minutes.length === 1) {
+      // add a zero in front if the length of minutes, as a string, is 1
+      minutes = '0' + minutes;
+    }
     // the month is 0-indexed, so we need to add 1!
-    const newDate = `${t.getMonth() + 1}/${t.getDate()}/${t.getFullYear()}`;
+    const newDate = `${
+      t.getMonth() + 1
+    }/${t.getDate()}/${t.getFullYear()} at ${hours}:${minutes}${amOrPm} `;
     console.log(`newDate`, newDate);
     return newDate;
   };
