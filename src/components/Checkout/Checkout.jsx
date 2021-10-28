@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { useState } from 'react';
 import './Checkout.css';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 
 function Checkout() {
@@ -11,6 +12,7 @@ function Checkout() {
     const customerInfo = useSelector(store => store.customerInfo);
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [currentOrder, setCurrentOrder] = useState({
         customer_name: customerInfo.customer_name,
@@ -33,8 +35,8 @@ function Checkout() {
                 data: currentOrder
             }).then((response) => {
                 //get request
-                setCurrentOrder({});
-                history.push('/home');
+                dispatch({ type: `RESET` });
+                history.push('/');
             }).catch((error) => {
                 console.log(`ERROR in /api/order POST`, error);
             });
