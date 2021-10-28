@@ -5,6 +5,11 @@ import { useState } from 'react';
 function CustomerForm() {
 
     const [newCustomer, setNewCustomer] = useState('');
+        
+    
+    
+    
+    
     const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
