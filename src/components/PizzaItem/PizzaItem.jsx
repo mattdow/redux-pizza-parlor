@@ -3,7 +3,7 @@ import axios from 'axios';
 import './PizzaItem.css';
 import {useSelector, useDispatch} from 'react-redux';
 
-function PizzaItem({item, }) {
+function PizzaItem({item }) {
 
     // define a variable equal to the current order number
     const currentOrder = useSelector(store => store.orderReducer)
@@ -21,7 +21,7 @@ function PizzaItem({item, }) {
     }
 
     // define a function to dispatch a new pizza to the reducer
-    const addPizza = (item) => {
+    const addPizza = () => {
         console.log('Adding pizza', item.name);
         dispatch({
             type: 'ADD_PIZZA',
@@ -30,12 +30,22 @@ function PizzaItem({item, }) {
     }
 
     // define a function to dispatch a delete pizza to the reducer
-    const deletePizza = (item) => {
+    const deletePizza = () => {
         console.log('Deleting pizza', item.name);
         dispatch({
-            type: 'DELETE_PIZZA',
+            type: 'REMOVE_PIZZA',
             payload: item
         })
+    }
+
+    const addAndToggle = () => {
+        addPizza();
+        toggleAddDelete();
+    }
+
+    const deleteAndToggle = () => {
+        deletePizza();
+        toggleAddDelete();
     }
 
 
@@ -52,8 +62,8 @@ function PizzaItem({item, }) {
             <p className="pizza-description">{item.description}</p>
             <p className="pizza-price">{item.price}</p>
             {addDelete ?
-                (<button className="add-btn" onClick={addPizza}>ADD</button>)
-                : (<button className="delete-btn" onClick={deletePizza}>DELETE</button>)
+                (<button className="add-btn" onClick={addAndToggle}>ADD</button>)
+                : (<button className="delete-btn" onClick={deleteAndToggle}>DELETE</button>)
             }
 
 
