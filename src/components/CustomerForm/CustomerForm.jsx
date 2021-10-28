@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 // import Picker from 'react-picker';
 
 function CustomerForm() {
@@ -11,6 +12,7 @@ function CustomerForm() {
     type: '',
   });
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -28,6 +30,8 @@ function CustomerForm() {
       zip: '',
       type: '',
     });
+
+    history.push(`/checkout`);
   };
 
   console.log(`newCustomer`, newCustomer);
