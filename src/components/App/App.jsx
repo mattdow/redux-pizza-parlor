@@ -10,26 +10,28 @@ import Header from '../Header/Header.jsx';
 
 function App() {
   return (
-
     <Router>
       <div className="App">
         {/* <Link to="/CustomerForm">Customer Info</Link> */}
-        <Header/>
 
         <Route path="/" exact>
+          <Header displayTotal={true} />
           <PizzaList />
         </Route>
 
         <Route path="/CustomerForm" exact>
+          <Header displayTotal={true} />
           <CustomerForm />
         </Route>
 
-        
         <Route path="/checkout" exact>
+          <Header displayTotal={true} />
           <Checkout />
         </Route>
 
         <Route path="/admin" exact>
+          <Header displayTotal={false} />
+
           <AdminComp />
         </Route>
       </div>
