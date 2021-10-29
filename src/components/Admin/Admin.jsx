@@ -51,7 +51,6 @@ function Admin() {
   };
 
   const showOrder = (order) => {
-    console.log(`in Admin showOrder with order`, order);
     setCurrentOrder(order);
     setModalIsOpen(true);
   };
@@ -80,11 +79,16 @@ function Admin() {
             Order Details:
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {currentOrder.customer_name}
-            {currentOrder.street_address}
-            {currentOrder.zip}
-            {currentOrder.time}
-            {currentOrder.type}
+            Name: {currentOrder.customer_name}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Address: {currentOrder.street_address}, {currentOrder.zip}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Order Placed: {currentOrder.time}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Type: {currentOrder.type}
           </Typography>
         </Box>
       </Modal>
