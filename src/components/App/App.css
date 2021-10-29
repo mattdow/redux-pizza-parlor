@@ -2,3 +2,11 @@
   text-align: center;
 }
 
+.bodyContent {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.footerContent{
+    margin-top: auto;
+}

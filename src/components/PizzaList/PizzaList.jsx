@@ -46,9 +46,12 @@ function PizzaList() {
                 />
             ))}
         </div>
+
         <div align="right" className="button-bar">
             <Button  variant="contained" onClick={handleClick}>NEXT</Button>
         </div>
+
+        
     </>)
 }
 export default PizzaList;
