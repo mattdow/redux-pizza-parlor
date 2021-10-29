@@ -5,6 +5,7 @@ import './Checkout.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
+
 function Checkout() {
   const pizzaOrderList = useSelector((store) => store.pizzaOrderList);
   const customerInfo = useSelector((store) => store.customerInfo);
