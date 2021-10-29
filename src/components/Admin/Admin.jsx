@@ -1,10 +1,30 @@
 import './Admin.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import OrderItem from '../OrderItem/OrderItem';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+// define the modal's style
+// these are the defaults from mui
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 function Admin() {
   // set up local state to hold the orders
   const [orderList, setOrderList] = useState([]);
+  const [currentOrder, setCurrentOrder] = useState({});
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // set up a useEffect to update the page once it is loaded
   useEffect(() => {
@@ -57,6 +77,12 @@ function Admin() {
     return `${month}/${dayInMonth}/${year} at ${hours}:${minutes}${amOrPm} `;
   };
 
+  const showOrder = (order) => {
+    setCurrentOrder(order);
+    setModalIsOpen(true);
+  };
+
+  console.log(`currentOrder`, currentOrder);
   return (
     <>
       <table className="adminTable">
@@ -69,16 +95,35 @@ function Admin() {
           </tr>
         </thead>
         <tbody>
-          {orderList.map((person, i) => (
-            <tr>
-              <td>{person.customer_name}</td>
-              <td>{convertTime(person.time)}</td>
-              <td>{person.type}</td>
-              <td>{person.total}</td>
-            </tr>
+          {orderList.map((order, i) => (
+            <OrderItem
+              key={i}
+              order={order}
+              showOrder={showOrder}
+              convertTime={convertTime}
+            />
           ))}
         </tbody>
       </table>
+      <Modal open={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+        <Box sx={modalStyle}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Order Details:
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Name: {currentOrder.customer_name}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Address: {currentOrder.street_address}, {currentOrder.zip}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Order Placed: {convertTime(currentOrder.time)}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Type: {currentOrder.type}
+          </Typography>
+        </Box>
+      </Modal>
     </>
   );
 }
