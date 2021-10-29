@@ -31,8 +31,6 @@ function Admin() {
       });
   };
 
-  console.log(orderList);
-
   return (
     <>
       <table className="adminTable">

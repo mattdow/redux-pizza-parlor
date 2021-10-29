@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 function OrderItem({ order }) {
   const convertTime = (time) => {
     // convert the time from the server into a js object
@@ -26,9 +28,27 @@ function OrderItem({ order }) {
     return `${month}/${dayInMonth}/${year} at ${hours}:${minutes}${amOrPm} `;
   };
 
+  const handleClick = (event) => {
+    console.log(`in handleClick, id=`, order.id);
+    // perform axios request
+    axios
+      .get(`/api/order/${order.id}`)
+      .then((response) => {
+        // handle the display in a modal in Admin
+        console.log(response.data);
+        // showOrder(response.data);f
+      })
+      .catch((err) => {
+        console.log(
+          'There was an error retrieving the order details from the server:',
+          err
+        );
+      });
+  };
+
   console.log('display?');
   return (
-    <tr id={order.id}>
+    <tr id={order.id} onClick={handleClick}>
       <td>{order.customer_name}</td>
       <td>{convertTime(order.time)}</td>
       <td>{order.type}</td>
