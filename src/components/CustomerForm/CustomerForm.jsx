@@ -89,7 +89,10 @@ function CustomerForm() {
       />
       <label htmlFor="delivery">Delivery</label>
 
-      <button type="submit">NEXT</button>
+      <div>
+        <button onClick={() => history.push(`/`)}>PREVIOUS</button>
+        <button type="submit">NEXT</button>
+      </div>
     </form>
   );
 }

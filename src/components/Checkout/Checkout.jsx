@@ -85,7 +85,10 @@ function Checkout() {
         </table>
       </div>
       <h3>Total: {currentOrder.total}</h3>
-      <button onClick={handleCheckout}>Checkout</button>
+      <div>
+        <button onClick={() => history.push(`/CustomerForm`)}>PREVIOUS</button>
+        <button onClick={handleCheckout}>CHECKOUT</button>
+      </div>
     </>
   );
 }
