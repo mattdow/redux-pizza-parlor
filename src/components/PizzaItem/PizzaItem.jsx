@@ -4,6 +4,7 @@ import './PizzaItem.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
+import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
@@ -57,24 +58,26 @@ function PizzaItem({ item }) {
 
   return (
     <div className="gallery-item">
-    <Card variant="outlined" sx={{ maxWidth: 200 }}>  
+    <Card variant="outlined" sx={{ maxWidth: 300 }}> 
+        <CardHeader title={item.name}/> 
           <CardActionArea>
                 <CardMedia
                     component="img"
                     height="150"
-                    width="150"
+                    width="250"
                     image={item.image_path}
                 />
-                <CardContent>
-                    <Typography className="pizza-name" gutterBottom variant="h5" color="GrayText.secondary">
-                        {item.name}
-                    </Typography>
-                    <Typography className="pizza-description" gutterBottom variant="body2" color="GrayText.secondary">
-                        {item.description}
-                    </Typography>
-                    <Typography className="pizza-price" gutterBottom variant="body2" color="GrayText.secondary">
-                        ${item.price}
-                    </Typography>
+                <CardContent height="400" width="300">
+                    <div className="item-text">
+                        <Typography className="pizza-description" gutterBottom variant="body2" color="GrayText.secondary">
+                            {item.description}
+                        </Typography>
+                        <Typography className="pizza-price" gutterBottom variant="body1" color="GrayText.primary" >
+                            ${item.price}
+                        </Typography>
+
+                    </div>
+                    
 
                 </CardContent>
           </CardActionArea>
@@ -82,11 +85,11 @@ function PizzaItem({ item }) {
             
             {/* Button to delete card */}
             {addDelete ? (
-        <Button size="small" color="primary" onClick={addAndToggle}>
+        <Button variant="outlined" size="large" color="primary" onClick={addAndToggle}>
           ADD
         </Button>
       ) : (
-        <Button className="delete-btn" onClick={deleteAndToggle}>
+        <Button variant="outlined" size= "large" className="delete-btn" color="error" onClick={deleteAndToggle}>
           DELETE
         </Button>
       )}
