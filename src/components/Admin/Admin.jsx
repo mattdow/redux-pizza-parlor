@@ -50,6 +50,33 @@ function Admin() {
       });
   };
 
+  const convertTime = (time) => {
+    // convert the time from the server into a js object
+    const t = new Date(time);
+    // the month is 0-indexed, so we need to add 1!
+    let month = t.getMonth() + 1;
+    let dayInMonth = t.getDate();
+    let year = t.getFullYear();
+    // change the hours from military time to am / pm
+    let hours;
+    let amOrPm = 'am';
+    hours = t.getHours();
+    if (hours > 12) {
+      // set this to am and pm time
+      hours = hours - 12;
+      // in this case it's pm
+      amOrPm = 'pm';
+    }
+    // set the minutes to display correctly, adding a 0 if less than 10
+    let minutes = String(t.getMinutes());
+    if (minutes.length === 1) {
+      // add a zero in front if the length of minutes, as a string, is 1
+      minutes = '0' + minutes;
+    }
+    // return all of the above in a nice string using template literals
+    return `${month}/${dayInMonth}/${year} at ${hours}:${minutes}${amOrPm} `;
+  };
+
   const showOrder = (order) => {
     setCurrentOrder(order);
     setModalIsOpen(true);
@@ -69,7 +96,12 @@ function Admin() {
         </thead>
         <tbody>
           {orderList.map((order, i) => (
-            <OrderItem key={i} order={order} showOrder={showOrder} />
+            <OrderItem
+              key={i}
+              order={order}
+              showOrder={showOrder}
+              convertTime={convertTime}
+            />
           ))}
         </tbody>
       </table>
@@ -85,7 +117,7 @@ function Admin() {
             Address: {currentOrder.street_address}, {currentOrder.zip}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Order Placed: {currentOrder.time}
+            Order Placed: {convertTime(currentOrder.time)}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Type: {currentOrder.type}
