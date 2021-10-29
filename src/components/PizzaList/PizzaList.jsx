@@ -45,8 +45,8 @@ function PizzaList() {
                 />
             ))}
         </div>
-
-        <button onClick={handleClick}>Next</button>
+        <div>  <button onClick={handleClick}>NEXT</button> </div>
+      
     </>)
 }
 export default PizzaList;
