@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function OrderItem({ order }) {
+function OrderItem({ order, showOrder }) {
   const convertTime = (time) => {
     // convert the time from the server into a js object
     const t = new Date(time);
@@ -35,8 +35,7 @@ function OrderItem({ order }) {
       .get(`/api/order/${order.id}`)
       .then((response) => {
         // handle the display in a modal in Admin
-        console.log(response.data);
-        // showOrder(response.data);f
+        showOrder(response.data);
       })
       .catch((err) => {
         console.log(
