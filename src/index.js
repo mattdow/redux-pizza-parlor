@@ -65,6 +65,9 @@ const orderTotal = (state = 0, action) => {
     return state + Number(action.payload.price);
   } else if (action.type === 'REMOVE_PIZZA') {
     return state - Number(action.payload.price);
+  } else if (action.type === 'RESET') {
+    // this will clear the customer info and reset state to its initial value
+    return 0;
   }
   return state;
 };

@@ -25,7 +25,7 @@ function PizzaItem({ item }) {
     console.log('Adding pizza', item.name);
     dispatch({
       type: 'ADD_PIZZA',
-      payload: item,
+      payload: {...item, quantity:1},
     });
   };
 
