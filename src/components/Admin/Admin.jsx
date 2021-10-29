@@ -23,6 +23,7 @@ const modalStyle = {
 function Admin() {
   // set up local state to hold the orders
   const [orderList, setOrderList] = useState([]);
+  const [currentOrder, setCurrentOrder] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // set up a useEffect to update the page once it is loaded
@@ -51,9 +52,11 @@ function Admin() {
 
   const showOrder = (order) => {
     console.log(`in Admin showOrder with order`, order);
+    setCurrentOrder(order);
     setModalIsOpen(true);
   };
 
+  console.log(`currentOrder`, currentOrder);
   return (
     <>
       <table className="adminTable">
@@ -73,7 +76,16 @@ function Admin() {
       </table>
       <Modal open={modalIsOpen} onClose={() => setModalIsOpen(false)}>
         <Box sx={modalStyle}>
-          <p>Pizza details</p>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Order Details:
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {currentOrder.customer_name}
+            {currentOrder.street_address}
+            {currentOrder.zip}
+            {currentOrder.time}
+            {currentOrder.type}
+          </Typography>
         </Box>
       </Modal>
     </>

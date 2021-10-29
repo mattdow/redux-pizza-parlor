@@ -45,7 +45,6 @@ function OrderItem({ order, showOrder }) {
       });
   };
 
-  console.log('display?');
   return (
     <tr id={order.id} onClick={handleClick}>
       <td>{order.customer_name}</td>

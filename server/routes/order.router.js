@@ -15,7 +15,8 @@ router.get('/:id', (req, res) => {
   pool
     .query(queryText, values)
     .then((result) => {
-      res.send(result.rows);
+      // we only want to send one object, not an array, and it will be at index 0
+      res.send(result.rows[0]);
     })
     .catch((error) => {
       console.log(`Error GET /api/order/${req.params.id}`, error);
