@@ -4,6 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import Button from '@mui/material/Button';
 
 function PizzaList() {
     // define and initialize our array of pizza menu items
@@ -45,8 +46,12 @@ function PizzaList() {
                 />
             ))}
         </div>
-        <div>  <button onClick={handleClick}>NEXT</button> </div>
-      
+
+        <div align="right" className="button-bar">
+            <Button  variant="contained" onClick={handleClick}>NEXT</Button>
+        </div>
+
+        
     </>)
 }
 export default PizzaList;
